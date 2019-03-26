@@ -115,10 +115,14 @@ if(STATIC_LINK_VW)
       file(GLOB ZLIB_LIBRARY /usr/local/Cellar/zlib/*/lib/libz.a)
     endif()
   elseif()
-    set(LINK_THREADS -Wl,--whole-archive -lpthread -Wl,--no-whole-archive)
+    set(LINK_THREADS -Wl,--whole-archive -lpthread -Wl,--no-whole-archive, --fPIC)
     set(unix_static_flag -static)
   endif()
 endif()
+
+#FOR DATABRICKS
+#set(LINK_THREADS -Wl,--whole-archive -lpthread -Wl,--no-whole-archive)
+
 
 # Align and foreach are also required, for some reason they can't be specified as components though.
 find_package(Boost REQUIRED COMPONENTS program_options system thread unit_test_framework)
